@@ -17,7 +17,6 @@
 #include "place.h"
 #include "scanner.h"
 #include "string_utils.h"
-#include "token_types.h"
 
 static libpostal_normalize_options_t LIBPOSTAL_DEFAULT_OPTIONS = {
         .languages = NULL,

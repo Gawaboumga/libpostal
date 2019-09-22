@@ -1,5 +1,6 @@
 #include "string_similarity.h"
 #include "string_utils.h"
+#include "token_types.h"
 
 #include <limits.h>
 
@@ -296,7 +297,7 @@ bool possible_abbreviation_unicode_with_edits(uint32_array *u1_array, uint32_arr
     return edits.num_matches == min_len && u1_array->a[0] == u2_array->a[0];
 }
 
-inline bool possible_abbreviation_unicode(uint32_array *u1_array, uint32_array *u2_array) {
+bool possible_abbreviation_unicode(uint32_array *u1_array, uint32_array *u2_array) {
     affine_gap_edits_t edits = affine_gap_distance_unicode(u1_array, u2_array);
 
     ssize_t prefix_len = unicode_common_prefix(u1_array, u2_array);
@@ -344,11 +345,11 @@ static bool possible_abbreviation_options(const char *s1, const char *s2, bool s
     return abbrev;
 }
 
-inline bool possible_abbreviation(const char *s1, const char *s2) {
+bool possible_abbreviation(const char *s1, const char *s2) {
     return possible_abbreviation_options(s1, s2, false);
 }
 
-inline bool possible_abbreviation_strict(const char *s1, const char *s2) {
+bool possible_abbreviation_strict(const char *s1, const char *s2) {
     return possible_abbreviation_options(s1, s2, true);
 }
 
@@ -581,11 +582,11 @@ double jaro_winkler_distance_prefix_threshold(const char *s1, const char *s2, do
     return jaro_winkler;
 }
 
-inline double jaro_winkler_distance(const char *s1, const char *s2) {
+double jaro_winkler_distance(const char *s1, const char *s2) {
     return jaro_winkler_distance_prefix_threshold(s1, s2, DEFAULT_JARO_WINKLER_PREFIX_SCALE, DEFAULT_JARO_WINKLER_BONUS_THRESHOLD);
 }
 
-inline double jaro_winkler_distance_unicode(uint32_array *u1_array, uint32_array *u2_array) {
+double jaro_winkler_distance_unicode(uint32_array *u1_array, uint32_array *u2_array) {
     return jaro_winkler_distance_unicode_prefix_threshold(u1_array, u2_array, DEFAULT_JARO_WINKLER_PREFIX_SCALE, DEFAULT_JARO_WINKLER_BONUS_THRESHOLD);
 }
 

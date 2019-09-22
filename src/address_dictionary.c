@@ -25,7 +25,7 @@ address_expansion_value_t *address_dictionary_get_expansions(uint32_t i) {
 
 }
 
-inline bool address_expansion_in_dictionary(address_expansion_t expansion, uint16_t dictionary_id) {
+bool address_expansion_in_dictionary(address_expansion_t expansion, uint16_t dictionary_id) {
     for (uint32_t i = 0; i < expansion.num_dictionaries; i++) {
         if (expansion.dictionary_ids[i] == dictionary_id) {
              return true;
@@ -96,7 +96,7 @@ char *address_dictionary_get_canonical(uint32_t index) {
     return cstring_array_get_string(address_dict->canonical, index);    
 }
 
-inline bool address_expansions_have_canonical_interpretation(address_expansion_array *expansions) {
+bool address_expansions_have_canonical_interpretation(address_expansion_array *expansions) {
     if (expansions == NULL) return false;
 
     address_expansion_t *expansions_array = expansions->a;
@@ -111,7 +111,7 @@ inline bool address_expansions_have_canonical_interpretation(address_expansion_a
 
 }
 
-inline bool address_phrase_has_canonical_interpretation(phrase_t phrase) {
+bool address_phrase_has_canonical_interpretation(phrase_t phrase) {
     address_expansion_value_t *value = address_dictionary_get_expansions(phrase.data);
     if (value == NULL) return false;
 
@@ -661,7 +661,7 @@ bool address_dictionary_save(char *path) {
     return ret_val;
 }
 
-inline bool address_dictionary_module_setup(char *filename) {
+bool address_dictionary_module_setup(char *filename) {
     if (address_dict == NULL) {
         return address_dictionary_load(filename == NULL ? DEFAULT_ADDRESS_EXPANSION_PATH: filename);
     }

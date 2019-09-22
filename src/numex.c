@@ -4,6 +4,7 @@
 #include "file_utils.h"
 
 #include "log/log.h"
+#include "token_types.h"
 
 #define NUMEX_TABLE_SIGNATURE 0xBBBBBBBB
 

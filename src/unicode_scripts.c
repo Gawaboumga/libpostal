@@ -4,12 +4,12 @@
 
 #define MAX_ASCII 128
 
-inline script_t get_char_script(uint32_t ch) {
+script_t get_char_script(uint32_t ch) {
     if (ch > NUM_CODEPOINTS - 1) return SCRIPT_UNKNOWN;
     return char_scripts[ch];
 }
 
-inline script_languages_t get_script_languages(script_t script) {
+script_languages_t get_script_languages(script_t script) {
     return script_languages[script];
 }
 

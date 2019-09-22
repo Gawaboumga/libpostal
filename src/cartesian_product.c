@@ -1,4 +1,5 @@
 #include "cartesian_product.h"
+#include "string_utils.h"
 #include <stdarg.h>
 
 cartesian_product_iterator_t *cartesian_product_iterator_new_vargs(size_t n, va_list args) {

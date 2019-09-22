@@ -49,7 +49,7 @@ void graph_destroy(graph_t *self) {
     free(self);
 }
 
-inline void graph_set_size(graph_t *self) {
+void graph_set_size(graph_t *self) {
     if (self->type != GRAPH_BIPARTITE) {
         uint32_t max = self->m > self->n ? self->m : self->n;
         self->m = max;
@@ -57,7 +57,7 @@ inline void graph_set_size(graph_t *self) {
     }
 }
 
-inline void graph_clear(graph_t *self) {
+void graph_clear(graph_t *self) {
     uint32_array_clear(self->indptr);
     if (!self->fixed_rows) {
         uint32_array_push(self->indptr, 0);
@@ -66,7 +66,7 @@ inline void graph_clear(graph_t *self) {
     uint32_array_clear(self->indices);
 }
 
-inline void graph_finalize_vertex_no_sort(graph_t *self) {
+void graph_finalize_vertex_no_sort(graph_t *self) {
     uint32_array_push(self->indptr, (uint32_t)self->indices->n);
     if (!self->fixed_rows) {
         self->m++;
@@ -123,13 +123,13 @@ bool graph_has_edge(graph_t *self, uint32_t i, uint32_t j) {
 }
 
 
-inline void graph_append_edge(graph_t *self, uint32_t col) {
+void graph_append_edge(graph_t *self, uint32_t col) {
     uint32_array_push(self->indices, col);
     if (col >= self->n) self->n = col + 1;
     graph_set_size(self);
 }
 
-inline void graph_append_edges(graph_t *self, uint32_t *col, size_t n) {
+void graph_append_edges(graph_t *self, uint32_t *col, size_t n) {
     for (int i = 0; i < n; i++) {
         graph_append_edge(self, col[i]);
     }

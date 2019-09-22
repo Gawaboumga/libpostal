@@ -8,6 +8,7 @@
 #include "scanner.h"
 #include "soft_tfidf.h"
 #include "string_similarity.h"
+#include "scanner.h"
 #include "token_types.h"
 
 bool expansions_intersect(cstring_array *expansions1, cstring_array *expansions2) {
@@ -483,7 +484,7 @@ libpostal_fuzzy_duplicate_status_t is_fuzzy_duplicate(size_t num_tokens1, char *
     return (libpostal_fuzzy_duplicate_status_t){dupe_status, max_sim};
 }
 
-inline libpostal_fuzzy_duplicate_status_t is_name_duplicate_fuzzy(size_t num_tokens1, char **tokens1, double *token_scores1, size_t num_tokens2, char **tokens2, double *token_scores2, libpostal_fuzzy_duplicate_options_t options) {
+libpostal_fuzzy_duplicate_status_t is_name_duplicate_fuzzy(size_t num_tokens1, char **tokens1, double *token_scores1, size_t num_tokens2, char **tokens2, double *token_scores2, libpostal_fuzzy_duplicate_options_t options) {
     libpostal_normalize_options_t normalize_options = libpostal_get_default_options();
     normalize_options.address_components = LIBPOSTAL_ADDRESS_NAME;
 
@@ -497,7 +498,7 @@ inline libpostal_fuzzy_duplicate_status_t is_name_duplicate_fuzzy(size_t num_tok
 }
 
 
-inline libpostal_fuzzy_duplicate_status_t is_street_duplicate_fuzzy(size_t num_tokens1, char **tokens1, double *token_scores1, size_t num_tokens2, char **tokens2, double *token_scores2, libpostal_fuzzy_duplicate_options_t options) {
+libpostal_fuzzy_duplicate_status_t is_street_duplicate_fuzzy(size_t num_tokens1, char **tokens1, double *token_scores1, size_t num_tokens2, char **tokens2, double *token_scores2, libpostal_fuzzy_duplicate_options_t options) {
     libpostal_normalize_options_t normalize_options = libpostal_get_default_options();
     normalize_options.address_components = LIBPOSTAL_ADDRESS_STREET;
 

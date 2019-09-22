@@ -52,7 +52,7 @@ void sparse_matrix_destroy(sparse_matrix_t *self) {
     free(self);
 }
 
-inline void sparse_matrix_clear(sparse_matrix_t *self) {
+void sparse_matrix_clear(sparse_matrix_t *self) {
     uint32_array_clear(self->indptr);
     uint32_array_push(self->indptr, 0);
 
@@ -60,20 +60,20 @@ inline void sparse_matrix_clear(sparse_matrix_t *self) {
     double_array_clear(self->data);
 }
 
-inline void sparse_matrix_finalize_row(sparse_matrix_t *self) {
+void sparse_matrix_finalize_row(sparse_matrix_t *self) {
     uint32_array_push(self->indptr, (uint32_t)self->indices->n);
     if (self->indptr->n > self->m + 1) {
         self->m++;
     }
 }
 
-inline void sparse_matrix_append(sparse_matrix_t *self, uint32_t col, double val) {
+void sparse_matrix_append(sparse_matrix_t *self, uint32_t col, double val) {
     uint32_array_push(self->indices, col);
     double_array_push(self->data, val);
     if (col >= self->n) self->n = col + 1;
 }
 
-inline void sparse_matrix_append_row(sparse_matrix_t *self, uint32_t *col, double *val, size_t n) {
+void sparse_matrix_append_row(sparse_matrix_t *self, uint32_t *col, double *val, size_t n) {
     for (int i = 0; i < n; i++) {
         sparse_matrix_append(self, col[i], val[i]);
     }
@@ -112,7 +112,7 @@ void sparse_matrix_sort_indices(sparse_matrix_t *self) {
 }
 
 
-inline int sparse_matrix_dot_vector(sparse_matrix_t *self, double *vec, size_t n, double *result) {
+int sparse_matrix_dot_vector(sparse_matrix_t *self, double *vec, size_t n, double *result) {
     if (n != self->n) return -1;
 
     uint32_t row, row_start, row_len;

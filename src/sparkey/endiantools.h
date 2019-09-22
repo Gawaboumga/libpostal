@@ -17,7 +17,7 @@
 #define ENDIANTOOLS_H_INCLUDED
 
 #include <stdio.h>
-#include <unistd.h>
+//#include <unistd.h>
 #include <stdint.h>
 
 #include "sparkey.h"

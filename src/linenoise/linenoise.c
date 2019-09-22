@@ -105,7 +105,9 @@
  *
  */
 
+#ifndef _WIN32
 #include <unistd.h>
+#endif //_WIN32
 #include <stdlib.h>
 #include <stdio.h>
 #include <errno.h>
@@ -119,7 +121,16 @@
 #include <sys/ioctl.h>
 #endif //_WIN32
 
+#ifndef _WIN32
 #include <unistd.h>
+#else
+
+#define strncasecmp _strnicmp
+#define strcasecmp _stricmp
+
+#define STDIN_FILENO 0
+#define STDOUT_FILENO 1
+#endif //_WIN32
 #include "linenoise.h"
 
 #define LINENOISE_DEFAULT_HISTORY_MAX_LEN 100

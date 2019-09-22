@@ -259,59 +259,59 @@ static inline double *state_trans_matrix_get_row(crf_context_t *self, double_mat
     return row + i * self->num_labels;
 }
 
-inline double *alpha_score(crf_context_t *self, size_t t) {
+double *alpha_score(crf_context_t *self, size_t t) {
     return double_matrix_get_row(self->alpha_score, t);
 }
 
-inline double *beta_score(crf_context_t *self, size_t t) {
+double *beta_score(crf_context_t *self, size_t t) {
     return double_matrix_get_row(self->beta_score, t);
 }
 
-inline double *state_score(crf_context_t *self, size_t t) {
+double *state_score(crf_context_t *self, size_t t) {
     return double_matrix_get_row(self->state, t);
 }
 
-inline double *state_trans_score(crf_context_t *self, size_t t, size_t i) {
+double *state_trans_score(crf_context_t *self, size_t t, size_t i) {
     return state_trans_matrix_get_row(self, self->state_trans, t, i);
 }
 
-inline double *state_trans_score_all(crf_context_t *self, size_t t) {
+double *state_trans_score_all(crf_context_t *self, size_t t) {
     return double_matrix_get_row(self->state_trans, t);
 }
 
-inline double *trans_score(crf_context_t *self, size_t i) {
+double *trans_score(crf_context_t *self, size_t i) {
     return double_matrix_get_row(self->trans, i);
 }
 
-inline double *exp_state_score(crf_context_t *self, size_t t) {
+double *exp_state_score(crf_context_t *self, size_t t) {
     return double_matrix_get_row(self->exp_state, t);
 }
 
-inline double *exp_state_trans_score(crf_context_t *self, size_t t, size_t i) {
+double *exp_state_trans_score(crf_context_t *self, size_t t, size_t i) {
     return state_trans_matrix_get_row(self, self->exp_state_trans, t, i);
 }
 
-inline double *exp_state_trans_score_all(crf_context_t *self, size_t t) {
+double *exp_state_trans_score_all(crf_context_t *self, size_t t) {
     return double_matrix_get_row(self->exp_state_trans, t);
 }
 
-inline double *exp_trans_score(crf_context_t *self, size_t i) {
+double *exp_trans_score(crf_context_t *self, size_t i) {
     return double_matrix_get_row(self->exp_trans, i);
 }
 
-inline double *state_mexp(crf_context_t *self, size_t t) {
+double *state_mexp(crf_context_t *self, size_t t) {
     return double_matrix_get_row(self->mexp_state, t);
 }
 
-inline double *state_trans_mexp(crf_context_t *self, size_t t, size_t i) {
+double *state_trans_mexp(crf_context_t *self, size_t t, size_t i) {
     return state_trans_matrix_get_row(self, self->mexp_state_trans, t, i);
 }
 
-inline double *trans_mexp(crf_context_t *self, size_t i) {
+double *trans_mexp(crf_context_t *self, size_t i) {
     return double_matrix_get_row(self->mexp_trans, i);
 }
 
-inline uint32_t *backward_edge_at(crf_context_t *self, size_t t) {
+uint32_t *backward_edge_at(crf_context_t *self, size_t t) {
     return uint32_matrix_get_row(self->backward_edges, t);
 }
 

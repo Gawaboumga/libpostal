@@ -8,6 +8,7 @@
 
 #include "klib/ksort.h"
 #include "log/log.h"
+#include "token_types.h"
 
 #define ADDRESS_PARSER_MODEL_FILENAME "address_parser.dat"
 #define ADDRESS_PARSER_MODEL_FILENAME_CRF "address_parser_crf.dat"

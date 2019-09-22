@@ -5,7 +5,6 @@
 #include "language_features.h"
 #include "minibatch.h"
 #include "normalize.h"
-#include "token_types.h"
 #include "unicode_scripts.h"
 
 #define LANGUAGE_CLASSIFIER_SIGNATURE 0xCCCCCCCC

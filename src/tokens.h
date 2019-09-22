@@ -6,10 +6,10 @@
 #include <stdlib.h>
 #include <stdint.h>
 
+#include "libpostal.h"
 #include "klib/khash.h"
 #include "collections.h"
 #include "string_utils.h"
-#include "token_types.h"
 #include "vector.h"
 
 typedef libpostal_token_t token_t;

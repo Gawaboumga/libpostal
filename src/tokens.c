@@ -19,7 +19,7 @@ tokenized_string_t *tokenized_string_new_size(size_t len, size_t num_tokens) {
     return self;
 }
 
-inline tokenized_string_t *tokenized_string_new_from_str_size(char *src, size_t len, size_t num_tokens) {
+tokenized_string_t *tokenized_string_new_from_str_size(char *src, size_t len, size_t num_tokens) {
     tokenized_string_t *self = tokenized_string_new_size(len, num_tokens);
     self->str = strndup(src, len);
     if (self->str == NULL) {

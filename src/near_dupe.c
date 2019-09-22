@@ -19,6 +19,7 @@
 #include "unicode_script_types.h"
 
 #include "geohash/geohash.h"
+#include "token_types.h"
 
 #define MAX_GEOHASH_PRECISION 12
 
@@ -1210,6 +1211,6 @@ cstring_array *near_dupe_hashes_languages(size_t num_components, char **labels, 
     return near_dupe_hashes;
 }
 
-inline cstring_array *near_dupe_hashes(size_t num_components, char **labels, char **values, libpostal_near_dupe_hash_options_t options) {
+cstring_array *near_dupe_hashes(size_t num_components, char **labels, char **values, libpostal_near_dupe_hash_options_t options) {
     return near_dupe_hashes_languages(num_components, labels, values, options, 0, NULL);
 }

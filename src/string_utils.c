@@ -41,14 +41,14 @@ int string_compare_len_case_insensitive(const char *str1, const char *str2, size
 
 }
 
-inline size_t string_common_prefix(const char *str1, const char *str2) {
+size_t string_common_prefix(const char *str1, const char *str2) {
     size_t common_prefix;
     for (common_prefix = 0; *str1 && *str2 && *str1 == *str2; str1++, str2++)
         common_prefix++;
     return common_prefix;
 }
 
-inline size_t string_common_suffix(const char *str1, const char *str2) {
+size_t string_common_suffix(const char *str1, const char *str2) {
     size_t common_suffix = 0;
     size_t str1_len = strlen(str1);
     size_t str2_len = strlen(str2);
@@ -58,30 +58,30 @@ inline size_t string_common_suffix(const char *str1, const char *str2) {
     return common_suffix;
 }
 
-inline bool string_starts_with(const char *str, const char *start) {
+bool string_starts_with(const char *str, const char *start) {
     for (; *start; str++, start++)
         if (*str != *start)
             return false;
     return true;
 }
 
-inline bool string_ends_with(const char *str, const char *ending) {
+bool string_ends_with(const char *str, const char *ending) {
     size_t end_len = strlen(ending);
     size_t str_len = strlen(str);
 
     return str_len < end_len ? false : !strcmp(str + str_len - end_len, ending);
 }
 
-inline bool string_equals(const char *s1, const char *s2) {
+bool string_equals(const char *s1, const char *s2) {
     if (s1 == NULL || s2  == NULL) return false;
     return strcmp(s1, s2) == 0;
 }
 
-inline void string_upper(char *s) {
+void string_upper(char *s) {
     for (; *s; ++s) *s = toupper(*s);
 }
 
-inline char *string_replace_char(char *str, char c1, char c2) {
+char *string_replace_char(char *str, char c1, char c2) {
     char *repl = strdup(str);
     if (repl == NULL) return NULL;
     char *ptr = repl;
@@ -136,18 +136,18 @@ char *string_replace(char *str, char *replace, char *with) {
 }
 
 
-inline bool string_is_upper(char *s) {
+bool string_is_upper(char *s) {
     for (; *s; ++s) {
         if (*s != toupper(*s)) return false;
     }
     return true;
 }
 
-inline void string_lower(char *s) {
+void string_lower(char *s) {
     for (; *s; ++s) *s = tolower(*s);
 }
 
-inline bool string_is_lower(char *s) {
+bool string_is_lower(char *s) {
     for (; *s; ++s) {
         if (*s != tolower(*s)) return false;
     }
@@ -271,71 +271,71 @@ char *utf8_case(const char *s, casing_option_t casing, utf8proc_option_t options
     return (char *)buffer;
 }
 
-inline char *utf8_lower_options(const char *s, utf8proc_option_t options) {
+char *utf8_lower_options(const char *s, utf8proc_option_t options) {
     return utf8_case(s, UTF8_LOWER, options);
 }
 
-inline char *utf8_lower(const char *s) {
+char *utf8_lower(const char *s) {
     return utf8_case(s, UTF8_LOWER, UTF8PROC_OPTIONS_NFC);
 }
 
-inline char *utf8_upper_options(const char *s, utf8proc_option_t options) {
+char *utf8_upper_options(const char *s, utf8proc_option_t options) {
     return utf8_case(s, UTF8_UPPER, options);
 }
 
-inline char *utf8_upper(const char *s) {
+ char *utf8_upper(const char *s) {
     return utf8_case(s, UTF8_UPPER, UTF8PROC_OPTIONS_NFC);
 }
 
 
-inline bool utf8_is_letter(int cat) {
+bool utf8_is_letter(int cat) {
     return cat == UTF8PROC_CATEGORY_LL || cat == UTF8PROC_CATEGORY_LU        \
             || cat == UTF8PROC_CATEGORY_LT || cat == UTF8PROC_CATEGORY_LO    \
             || cat == UTF8PROC_CATEGORY_LM;
 }
 
-inline bool utf8_is_digit(int cat) {
+bool utf8_is_digit(int cat) {
     return cat == UTF8PROC_CATEGORY_ND;
 }
 
-inline bool utf8_is_number(int cat) {
+bool utf8_is_number(int cat) {
     return cat == UTF8PROC_CATEGORY_ND || cat == UTF8PROC_CATEGORY_NL || cat == UTF8PROC_CATEGORY_NO;
 }
 
-inline bool utf8_is_letter_or_number(int cat) {
+bool utf8_is_letter_or_number(int cat) {
     return cat == UTF8PROC_CATEGORY_LL || cat == UTF8PROC_CATEGORY_LU        \
             || cat == UTF8PROC_CATEGORY_LT || cat == UTF8PROC_CATEGORY_LO    \
             || cat == UTF8PROC_CATEGORY_LM || cat == UTF8PROC_CATEGORY_ND    \
             || cat == UTF8PROC_CATEGORY_NL || cat == UTF8PROC_CATEGORY_NO;
 }
 
-inline bool utf8_is_hyphen(int32_t ch) {
+bool utf8_is_hyphen(int32_t ch) {
     int cat = utf8proc_category(ch);
     return cat == UTF8PROC_CATEGORY_PD || ch == 0x2212;
 }
 
 #define PERIOD_CODEPOINT 46
 
-inline bool utf8_is_period(int32_t codepoint) {
+bool utf8_is_period(int32_t codepoint) {
     return codepoint == PERIOD_CODEPOINT;
 }
 
-inline bool utf8_is_punctuation(int cat) {
+bool utf8_is_punctuation(int cat) {
     return cat == UTF8PROC_CATEGORY_PD || cat == UTF8PROC_CATEGORY_PE        \
            || cat == UTF8PROC_CATEGORY_PF || cat == UTF8PROC_CATEGORY_PI    \
            || cat == UTF8PROC_CATEGORY_PO || cat == UTF8PROC_CATEGORY_PS;
 }
 
-inline bool utf8_is_symbol(int cat) {
+bool utf8_is_symbol(int cat) {
     return cat == UTF8PROC_CATEGORY_SK || cat == UTF8PROC_CATEGORY_SC       \
            || cat == UTF8PROC_CATEGORY_SM || cat == UTF8PROC_CATEGORY_SO;
 }
 
-inline bool utf8_is_separator(int cat) {
+bool utf8_is_separator(int cat) {
     return cat == UTF8PROC_CATEGORY_ZS || cat == UTF8PROC_CATEGORY_ZL || cat == UTF8PROC_CATEGORY_ZP;
 }
 
-inline bool utf8_is_whitespace(int32_t ch) {
+bool utf8_is_whitespace(int32_t ch) {
     int cat = utf8proc_category(ch);
     return utf8_is_separator(cat) || 
            ch == 9 || // character tabulation
@@ -485,22 +485,22 @@ int utf8_compare_len_option(const char *str1, const char *str2, size_t len, bool
     return (int) c1 - c2;
 }
 
-inline int utf8_compare_len(const char *str1, const char *str2, size_t len) {
+int utf8_compare_len(const char *str1, const char *str2, size_t len) {
     return utf8_compare_len_option(str1, str2, len, false);
 }
 
-inline int utf8_compare(const char *str1, const char *str2) {
+int utf8_compare(const char *str1, const char *str2) {
     size_t len1 = strlen(str1);
     size_t len2 = strlen(str2);
     size_t max_len = len1 >= len2 ? len1 : len2;
     return utf8_compare_len_option(str1, str2, max_len, false);
 }
 
-inline int utf8_compare_len_case_insensitive(const char *str1, const char *str2, size_t len) {
+int utf8_compare_len_case_insensitive(const char *str1, const char *str2, size_t len) {
     return utf8_compare_len_option(str1, str2, len, true);
 }
 
-inline int utf8_compare_case_insensitive(const char *str1, const char *str2, size_t len) {
+int utf8_compare_case_insensitive(const char *str1, const char *str2, size_t len) {
     size_t len1 = strlen(str1);
     size_t len2 = strlen(str2);
     size_t max_len = len1 >= len2 ? len1 : len2;
@@ -612,7 +612,7 @@ size_t utf8_common_prefix_len_ignore_separators(const char *str1, const char *st
 
 }
 
-inline size_t utf8_common_prefix_ignore_separators(const char *str1, const char *str2) {
+size_t utf8_common_prefix_ignore_separators(const char *str1, const char *str2) {
     return utf8_common_prefix_len_ignore_separators(str1, str2, strlen(str2));
 }
 
@@ -663,7 +663,7 @@ bool utf8_equal_ignore_separators_len(const char *str1, const char *str2, size_t
     return false;
 }
 
-inline bool utf8_equal_ignore_separators(const char *str1, const char *str2) {
+bool utf8_equal_ignore_separators(const char *str1, const char *str2) {
     size_t len1 = strlen(str1);
     size_t len2 = strlen(str2);
     size_t len = len1 > len2 ? len1 : len2;
@@ -740,15 +740,15 @@ ssize_t string_next_hyphen_index(char *str, size_t len) {
     return -1;
 }
 
-inline bool string_contains(char *str, char *sub) {
+bool string_contains(char *str, char *sub) {
     return str != NULL && sub != NULL && strstr(str, sub) != NULL;
 }
 
-inline bool string_contains_hyphen_len(char *str, size_t len) {
+bool string_contains_hyphen_len(char *str, size_t len) {
     return string_next_hyphen_index(str, len) >= 0;
 }
 
-inline bool string_contains_hyphen(char *str) {
+bool string_contains_hyphen(char *str) {
     return string_next_hyphen_index(str, strlen(str)) >= 0;
 }
 
@@ -781,11 +781,11 @@ ssize_t string_next_period(char *str) {
     return string_next_codepoint(str, PERIOD_CODEPOINT);
 }
 
-inline bool string_contains_period_len(char *str, size_t len) {
+bool string_contains_period_len(char *str, size_t len) {
     return string_next_codepoint_len(str, PERIOD_CODEPOINT, len) >= 0;
 }
 
-inline bool string_contains_period(char *str) {
+bool string_contains_period(char *str) {
     return string_next_codepoint(str, string_next_codepoint(str, PERIOD_CODEPOINT)) >= 0;
 }
 
@@ -835,7 +835,7 @@ size_t string_right_spaces_len(char *str, size_t len) {
 
 }
 
-inline size_t string_hyphen_prefix_len(char *str, size_t len) {
+size_t string_hyphen_prefix_len(char *str, size_t len) {
     // Strip beginning hyphens
     int32_t unichr;
     uint8_t *ptr = (uint8_t *)str;
@@ -846,7 +846,7 @@ inline size_t string_hyphen_prefix_len(char *str, size_t len) {
     return 0;
 }
 
-inline size_t string_hyphen_suffix_len(char *str, size_t len) {
+size_t string_hyphen_suffix_len(char *str, size_t len) {
     // Strip ending hyphens
     int32_t unichr;
     uint8_t *ptr = (uint8_t *)str;
@@ -904,14 +904,14 @@ char_array *char_array_from_string_no_copy(char *str, size_t n) {
     return array;
 }
 
-inline char *char_array_get_string(char_array *array) {
+char *char_array_get_string(char_array *array) {
     if (array->n == 0 || array->a[array->n - 1] != '\0') {
         char_array_terminate(array);
     }
     return array->a;
 }
 
-inline char *char_array_to_string(char_array *array) {
+char *char_array_to_string(char_array *array) {
     if (array->n == 0 || array->a[array->n - 1] != '\0') {
         char_array_terminate(array);
     }
@@ -921,14 +921,14 @@ inline char *char_array_to_string(char_array *array) {
 }
 
 
-inline void char_array_strip_nul_byte(char_array *array) {
+void char_array_strip_nul_byte(char_array *array) {
     if (array->n > 0 && array->a[array->n - 1] == '\0') {
         array->a[array->n - 1] = '\0';
         array->n--;
     }
 }
 
-inline size_t char_array_len(char_array *array) {
+size_t char_array_len(char_array *array) {
     if (array->n > 0 && array->a[array->n - 1] == '\0') {
         return array->n - 1;
     } else {
@@ -936,19 +936,19 @@ inline size_t char_array_len(char_array *array) {
     }
 }
 
-inline void char_array_append(char_array *array, char *str) {
+void char_array_append(char_array *array, char *str) {
     while(*str) {
         char_array_push(array, *str++);
     }    
 }
 
-inline void char_array_append_len(char_array *array, char *str, size_t len) {
+void char_array_append_len(char_array *array, char *str, size_t len) {
     for (size_t i = 0; i < len; i++) {
         char_array_push(array, *str++);
     }
 }
 
-inline void char_array_append_reversed_len(char_array *array, char *str, size_t len) {
+void char_array_append_reversed_len(char_array *array, char *str, size_t len) {
     int32_t unich;
     ssize_t char_len;
 
@@ -965,47 +965,47 @@ inline void char_array_append_reversed_len(char_array *array, char *str, size_t 
     }
 }
 
-inline void char_array_append_reversed(char_array *array, char *str) {
+void char_array_append_reversed(char_array *array, char *str) {
     size_t len = strlen(str);
     char_array_append_reversed_len(array, str, len);
 }
 
-inline void char_array_terminate(char_array *array) {
+void char_array_terminate(char_array *array) {
     char_array_push(array, '\0');
 }
 
-inline void char_array_cat(char_array *array, char *str) {
+void char_array_cat(char_array *array, char *str) {
     char_array_strip_nul_byte(array);
     char_array_append(array, str);
     char_array_terminate(array);
 }
 
-inline void char_array_cat_len(char_array *array, char *str, size_t len) {
+void char_array_cat_len(char_array *array, char *str, size_t len) {
     char_array_strip_nul_byte(array);
     char_array_append_len(array, str, len);
     char_array_terminate(array);
 }
 
 
-inline void char_array_cat_reversed(char_array *array, char *str) {
+void char_array_cat_reversed(char_array *array, char *str) {
     char_array_strip_nul_byte(array);
     char_array_append_reversed(array, str);
     char_array_terminate(array);
 }
 
 
-inline void char_array_cat_reversed_len(char_array *array, char *str, size_t len) {
+void char_array_cat_reversed_len(char_array *array, char *str, size_t len) {
     char_array_strip_nul_byte(array);
     char_array_append_reversed_len(array, str, len);
     char_array_terminate(array);
 }
 
-inline void char_array_add(char_array *array, char *str) {
+void char_array_add(char_array *array, char *str) {
     char_array_append(array, str);
     char_array_terminate(array);
 }
 
-inline void char_array_add_len(char_array *array, char *str, size_t len) {
+void char_array_add_len(char_array *array, char *str, size_t len) {
     char_array_append_len(array, str, len);
     char_array_terminate(array);
 }
@@ -1038,14 +1038,14 @@ void char_array_add_vjoined(char_array *array, char *separator, bool strip_separ
 
 }
 
-inline void char_array_add_joined(char_array *array, char *separator, bool strip_separator, int count, ...) {
+void char_array_add_joined(char_array *array, char *separator, bool strip_separator, int count, ...) {
     va_list args;
     va_start(args, count);
     char_array_add_vjoined(array, separator, strip_separator, count, args);
     va_end(args);
 }
 
-inline void char_array_cat_joined(char_array *array, char *separator, bool strip_separator, int count, ...) {
+void char_array_cat_joined(char_array *array, char *separator, bool strip_separator, int count, ...) {
     char_array_strip_nul_byte(array);
     va_list args;
     va_start(args, count);
@@ -1167,20 +1167,20 @@ bool cstring_array_extend(cstring_array *array, cstring_array *other) {
 }
 
 
-inline size_t cstring_array_capacity(cstring_array *self) {
+size_t cstring_array_capacity(cstring_array *self) {
     return self->str->m;
 }
 
-inline size_t cstring_array_used(cstring_array *self) {
+size_t cstring_array_used(cstring_array *self) {
     return self->str->n;
 }
 
-inline size_t cstring_array_num_strings(cstring_array *self) {
+size_t cstring_array_num_strings(cstring_array *self) {
     if (self == NULL) return 0;
     return self->indices->n;
 }
 
-inline void cstring_array_resize(cstring_array *self, size_t size) {
+void cstring_array_resize(cstring_array *self, size_t size) {
     if (size < cstring_array_capacity(self)) return;
     char_array_resize(self->str, size);
 }
@@ -1197,60 +1197,60 @@ void cstring_array_clear(cstring_array *self) {
     }
 }
 
-inline uint32_t cstring_array_start_token(cstring_array *self) {
+uint32_t cstring_array_start_token(cstring_array *self) {
     uint32_t index = (uint32_t)self->str->n;
     uint32_array_push(self->indices, index);
     return index;
 }
 
-inline void cstring_array_terminate(cstring_array *self) {
+void cstring_array_terminate(cstring_array *self) {
     char_array_terminate(self->str);
 }
 
-inline uint32_t cstring_array_add_string(cstring_array *self, char *str) {
+uint32_t cstring_array_add_string(cstring_array *self, char *str) {
     uint32_t index = cstring_array_start_token(self);
     char_array_append(self->str, str);
     char_array_terminate(self->str);
     return index;
 }
 
-inline uint32_t cstring_array_add_string_len(cstring_array *self, char *str, size_t len) {
+uint32_t cstring_array_add_string_len(cstring_array *self, char *str, size_t len) {
     uint32_t index = cstring_array_start_token(self);
     char_array_append_len(self->str, str, len);
     char_array_terminate(self->str);
     return index;
 }
 
-inline void cstring_array_append_string(cstring_array *self, char *str) {
+void cstring_array_append_string(cstring_array *self, char *str) {
     char_array_append(self->str, str);
 }
 
-inline void cstring_array_append_string_len(cstring_array *self, char *str, size_t len) {
+void cstring_array_append_string_len(cstring_array *self, char *str, size_t len) {
     char_array_append_len(self->str, str, len);
 }
 
-inline void cstring_array_cat_string(cstring_array *self, char *str) {
+void cstring_array_cat_string(cstring_array *self, char *str) {
     char_array_cat(self->str, str);
 }
 
-inline void cstring_array_cat_string_len(cstring_array *self, char *str, size_t len) {
+void cstring_array_cat_string_len(cstring_array *self, char *str, size_t len) {
     char_array_cat_len(self->str, str, len);
 }
 
-inline int32_t cstring_array_get_offset(cstring_array *self, uint32_t i) {
+int32_t cstring_array_get_offset(cstring_array *self, uint32_t i) {
     if (INVALID_INDEX(i, self->indices->n)) {
         return -1;
     }
     return (int32_t)self->indices->a[i];
 }
 
-inline char *cstring_array_get_string(cstring_array *self, uint32_t i) {
+char *cstring_array_get_string(cstring_array *self, uint32_t i) {
     int32_t data_index = cstring_array_get_offset(self, i);
     if (data_index < 0) return NULL;
     return self->str->a + data_index;
 }
 
-inline int64_t cstring_array_token_length(cstring_array *self, uint32_t i) {
+int64_t cstring_array_token_length(cstring_array *self, uint32_t i) {
     if (INVALID_INDEX(i, self->indices->n)) {
         return -1;
     }
@@ -1363,7 +1363,7 @@ string_tree_t *string_tree_new(void) {
     return string_tree_new_size((size_t)DEFAULT_STRING_TREE_SIZE);
 }
 
-inline char *string_tree_get_alternative(string_tree_t *self, size_t token_index, uint32_t alternative) {
+char *string_tree_get_alternative(string_tree_t *self, size_t token_index, uint32_t alternative) {
     if (token_index >= self->token_indices->n) return NULL;
 
     uint32_t token_start = self->token_indices->a[token_index];
@@ -1371,7 +1371,7 @@ inline char *string_tree_get_alternative(string_tree_t *self, size_t token_index
     return cstring_array_get_string(self->strings, token_start + alternative);
 }
 
-inline void string_tree_finalize_token(string_tree_t *self) {
+void string_tree_finalize_token(string_tree_t *self) {
     uint32_array_push(self->token_indices, (uint32_t)cstring_array_num_strings(self->strings));
 }
 
@@ -1382,32 +1382,32 @@ void string_tree_clear(string_tree_t *self) {
 }
 
 // terminated
-inline void string_tree_add_string(string_tree_t *self, char *str) {
+void string_tree_add_string(string_tree_t *self, char *str) {
     cstring_array_add_string(self->strings, str);
 }
 
-inline void string_tree_add_string_len(string_tree_t *self, char *str, size_t len) {
+void string_tree_add_string_len(string_tree_t *self, char *str, size_t len) {
     cstring_array_add_string_len(self->strings, str, len);
 }
 
 // unterminated
-inline void string_tree_append_string(string_tree_t *self, char *str) {
+void string_tree_append_string(string_tree_t *self, char *str) {
     cstring_array_append_string(self->strings, str);
 }
 
-inline void string_tree_append_string_len(string_tree_t *self, char *str, size_t len) {
+void string_tree_append_string_len(string_tree_t *self, char *str, size_t len) {
     cstring_array_append_string_len(self->strings, str, len);
 }
 
-inline uint32_t string_tree_num_tokens(string_tree_t *self) {
+uint32_t string_tree_num_tokens(string_tree_t *self) {
     return (uint32_t)self->token_indices->n - 1;
 }
 
-inline uint32_t string_tree_num_strings(string_tree_t *self) {
+uint32_t string_tree_num_strings(string_tree_t *self) {
     return (uint32_t)cstring_array_num_strings(self->strings);
 }
 
-inline uint32_t string_tree_num_alternatives(string_tree_t *self, uint32_t i) {
+uint32_t string_tree_num_alternatives(string_tree_t *self, uint32_t i) {
     if (i >= self->token_indices->n) return 0;
     uint32_t n = self->token_indices->a[i + 1] - self->token_indices->a[i];
     return n > 0 ? n : 1;

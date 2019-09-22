@@ -52,18 +52,18 @@ bool feature_counts_update_or_add(khash_t(str_double) *features, char *feature, 
 }
 
 
-inline bool feature_counts_add(khash_t(str_double) *features, char *feature, double count) {
+bool feature_counts_add(khash_t(str_double) *features, char *feature, double count) {
     return feature_counts_update_or_add(features, feature, count, true, true);
 }
 
-inline bool feature_counts_add_no_copy(khash_t(str_double) *features, char *feature, double count) {
+bool feature_counts_add_no_copy(khash_t(str_double) *features, char *feature, double count) {
     return feature_counts_update_or_add(features, feature, count, false, true);
 }
 
-inline bool feature_counts_update(khash_t(str_double) *features, char *feature, double count) {
+bool feature_counts_update(khash_t(str_double) *features, char *feature, double count) {
     return feature_counts_update_or_add(features, feature, count, true, false);
 }
 
-inline bool feature_counts_update_no_copy(khash_t(str_double) *features, char *feature, double count) {
+bool feature_counts_update_no_copy(khash_t(str_double) *features, char *feature, double count) {
     return feature_counts_update_or_add(features, feature, count, false, false);
 }

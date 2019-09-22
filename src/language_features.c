@@ -3,8 +3,9 @@
 #include "address_dictionary.h"
 #include "features.h"
 #include "normalize.h"
-#include "scanner.h"
 #include "unicode_scripts.h"
+#include "scanner.h"
+#include "token_types.h"
 
 #define UNIGRAMS 1
 #define BIGRAMS 2
@@ -14,12 +15,12 @@
 #define LANGUAGE_CLASSIFIER_NORMALIZE_STRING_OPTIONS NORMALIZE_STRING_LOWERCASE | NORMALIZE_STRING_LATIN_ASCII | NORMALIZE_STRING_REPLACE_HYPHENS
 #define LANGUAGE_CLASSIFIER_NORMALIZE_TOKEN_OPTIONS NORMALIZE_TOKEN_DELETE_FINAL_PERIOD | NORMALIZE_TOKEN_DELETE_ACRONYM_PERIODS | NORMALIZE_TOKEN_SPLIT_ALPHA_FROM_NUMERIC
 
-inline char *language_classifier_normalize_string(char *str) {
+char *language_classifier_normalize_string(char *str) {
     return normalize_string_latin(str, strlen(str), LANGUAGE_CLASSIFIER_NORMALIZE_STRING_OPTIONS);
 }
 
 
-inline void language_classifier_normalize_token(char_array *array, char *str, token_t token) {
+void language_classifier_normalize_token(char_array *array, char *str, token_t token) {
     char_array_strip_nul_byte(array);
     if (is_word_token(token.type)) {
         add_normalized_token(array, str, token, LANGUAGE_CLASSIFIER_NORMALIZE_TOKEN_OPTIONS);

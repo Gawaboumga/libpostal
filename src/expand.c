@@ -12,8 +12,8 @@
 #include "normalize.h"
 #include "scanner.h"
 #include "string_utils.h"
-#include "token_types.h"
 #include "transliterate.h"
+#include "token_types.h"
 
 
 #define DEFAULT_KEY_LEN 32

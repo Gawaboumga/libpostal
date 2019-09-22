@@ -100,31 +100,31 @@ trie_t *trie_new(void) {
     return trie_new_alphabet(DEFAULT_ALPHABET, sizeof(DEFAULT_ALPHABET));
 }
 
-inline bool trie_node_is_free(trie_node_t node) {
+bool trie_node_is_free(trie_node_t node) {
     return node.check < 0;
 }
 
-inline trie_node_t trie_get_node(trie_t *self, uint32_t index) {
+trie_node_t trie_get_node(trie_t *self, uint32_t index) {
     if ((index >= self->nodes->n) || index < ROOT_NODE_ID) return self->null_node;
     return self->nodes->a[index];
 }
 
-inline void trie_set_base(trie_t *self, uint32_t index, int32_t base) {
+void trie_set_base(trie_t *self, uint32_t index, int32_t base) {
     log_debug("Setting base at %d to %d\n", index, base);
     self->nodes->a[index].base = base;
 }
 
-inline void trie_set_check(trie_t *self, uint32_t index, int32_t check) {
+void trie_set_check(trie_t *self, uint32_t index, int32_t check) {
     log_debug("Setting check at %d to %d\n", index, check);
     self->nodes->a[index].check = check;
 }
 
 
-inline trie_node_t trie_get_root(trie_t *self) {
+trie_node_t trie_get_root(trie_t *self) {
     return self->nodes->a[ROOT_NODE_ID];
 }
 
-inline trie_node_t trie_get_free_list(trie_t *self) {
+trie_node_t trie_get_free_list(trie_t *self) {
     return self->nodes->a[FREE_LIST_ID];
 }
 
@@ -377,16 +377,16 @@ static void trie_relocate_base(trie_t *self, uint32_t current_index, int32_t new
 * Public methods
 */
 
-inline uint32_t trie_get_char_index(trie_t *self, unsigned char c) {
+uint32_t trie_get_char_index(trie_t *self, unsigned char c) {
     return self->alpha_map[(uint8_t)c] + 1;
 }
 
-inline uint32_t trie_get_transition_index(trie_t *self, trie_node_t node, unsigned char c) {
+uint32_t trie_get_transition_index(trie_t *self, trie_node_t node, unsigned char c) {
     uint32_t char_index = trie_get_char_index(self, c);
     return node.base + char_index;
 }
 
-inline trie_node_t trie_get_transition(trie_t *self, trie_node_t node, unsigned char c) {
+trie_node_t trie_get_transition(trie_t *self, trie_node_t node, unsigned char c) {
    uint32_t index = trie_get_transition_index(self, node, c);
 
     if (index >= self->nodes->n) {
@@ -661,13 +661,13 @@ bool trie_add_at_index(trie_t *self, uint32_t node_id, char *key, size_t len, ui
 }
 
 
-inline bool trie_add(trie_t *self, char *key, uint32_t data) {
+bool trie_add(trie_t *self, char *key, uint32_t data) {
     size_t len = strlen(key);
     if (len == 0) return false;
     return trie_add_at_index(self, ROOT_NODE_ID, key, len + 1, data);
 }
 
-inline bool trie_add_len(trie_t *self, char *key, size_t len, uint32_t data) {
+bool trie_add_len(trie_t *self, char *key, size_t len, uint32_t data) {
     return trie_add_at_index(self, ROOT_NODE_ID, key, len, data);
 }
 
@@ -690,7 +690,7 @@ bool trie_add_prefix_at_index(trie_t *self, char *key, uint32_t start_node_id, u
     return success;
 }
 
-inline bool trie_add_prefix(trie_t *self, char *key, uint32_t data) {
+bool trie_add_prefix(trie_t *self, char *key, uint32_t data) {
     return trie_add_prefix_at_index(self, key, ROOT_NODE_ID, data);
 }
 
@@ -717,7 +717,7 @@ bool trie_add_suffix_at_index(trie_t *self, char *key, uint32_t start_node_id, u
 
 }
 
-inline bool trie_add_suffix(trie_t *self, char *key, uint32_t data) {
+bool trie_add_suffix(trie_t *self, char *key, uint32_t data) {
     return trie_add_suffix_at_index(self, key, ROOT_NODE_ID, data);
 }
 
@@ -728,7 +728,7 @@ bool trie_compare_tail(trie_t *self, char *str, size_t len, size_t tail_index) {
     return strncmp((char *)current_tail, str, len) == 0;
 }
 
-inline trie_data_node_t trie_get_data_node(trie_t *self, trie_node_t node) {
+trie_data_node_t trie_get_data_node(trie_t *self, trie_node_t node) {
     if (node.base >= 0) {
         return NULL_DATA_NODE;
     }
@@ -737,13 +737,13 @@ inline trie_data_node_t trie_get_data_node(trie_t *self, trie_node_t node) {
     return data_node;
 }
 
-inline bool trie_set_data_node(trie_t *self, uint32_t index, trie_data_node_t data_node) {
+bool trie_set_data_node(trie_t *self, uint32_t index, trie_data_node_t data_node) {
     if (self == NULL || self->data == NULL || index >= self->data->n) return false;
     self->data->a[index] = data_node;
     return true;
 }
 
-inline bool trie_get_data_at_index(trie_t *self, uint32_t index,  uint32_t *data) {
+bool trie_get_data_at_index(trie_t *self, uint32_t index,  uint32_t *data) {
      if (index == NULL_NODE_ID) return false;
 
      trie_node_t node = trie_get_node(self, index);
@@ -754,12 +754,12 @@ inline bool trie_get_data_at_index(trie_t *self, uint32_t index,  uint32_t *data
      return true;    
 }
 
-inline bool trie_get_data(trie_t *self, char *key, uint32_t *data) {
+bool trie_get_data(trie_t *self, char *key, uint32_t *data) {
      uint32_t node_id = trie_get(self, key);
      return trie_get_data_at_index(self, node_id, data);
 }
 
-inline bool trie_set_data_at_index(trie_t *self, uint32_t index, uint32_t data) {
+bool trie_set_data_at_index(trie_t *self, uint32_t index, uint32_t data) {
     if (index == NULL_NODE_ID) return false;
      trie_node_t node = trie_get_node(self, index);
      trie_data_node_t data_node = trie_get_data_node(self, node);
@@ -768,7 +768,7 @@ inline bool trie_set_data_at_index(trie_t *self, uint32_t index, uint32_t data) 
 
 }
 
-inline bool trie_set_data(trie_t *self, char *key, uint32_t data) {
+bool trie_set_data(trie_t *self, char *key, uint32_t data) {
      uint32_t node_id = trie_get(self, key);
      if (node_id == NULL_NODE_ID) {
         return trie_add(self, key, data);
@@ -891,7 +891,7 @@ uint32_t trie_get(trie_t *self, char *word) {
 }
 
 
-inline uint32_t trie_num_keys(trie_t *self) {
+uint32_t trie_num_keys(trie_t *self) {
     if (self == NULL) return 0;
     return self->num_keys;
 }

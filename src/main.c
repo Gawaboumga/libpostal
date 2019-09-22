@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
-#include <sys/time.h>
-#include <unistd.h>
 
 #include "libpostal.h"
 #include "file_utils.h"

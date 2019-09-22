@@ -43,6 +43,9 @@ Utilities for manipulating strings in C.
 // Lowercase
 #define UTF8PROC_OPTIONS_CASE_FOLD UTF8PROC_OPTIONS_BASE | UTF8PROC_CASEFOLD
 
+#ifdef _WIN32
+	typedef int ssize_t;
+#endif // _WIN32
 
 // ASCII string methods
 int string_compare_case_insensitive(const char *str1, const char *str2);

@@ -6,8 +6,6 @@
 
 #include "address_dictionary.h"
 #include "collections.h"
-#include "tokens.h"
-#include "token_types.h"
 
 bool stopword_positions(uint32_array *stopwords_array, const char *str, token_array *tokens, size_t num_languages, char **languages);
 bool existing_acronym_phrase_positions(uint32_array *existing_acronyms_array, const char *str, token_array *token_array, size_t num_languages, char **languages);

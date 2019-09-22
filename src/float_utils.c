@@ -28,7 +28,7 @@ inline bool double_equals_epsilon(double a, double b, double epsilon) {
     return (diff <= largest * epsilon);
 }
 
-inline bool double_equals(double a, double b) {
+bool double_equals(double a, double b) {
     return double_equals_epsilon(a, b, DBL_EPSILON);
 }
 

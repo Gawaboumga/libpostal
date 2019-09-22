@@ -1,5 +1,6 @@
 #include "normalize.h"
 #include "strndup.h"
+#include "token_types.h"
 
 #define FULL_STOP_CODEPOINT 0x002e
 #define APOSTROPHE_CODEPOINT 0x0027
@@ -501,7 +502,7 @@ void add_normalized_token(char_array *array, char *str, token_t token, uint64_t 
 
 }
 
-inline void normalize_token(cstring_array *array, char *str, token_t token, uint64_t options) {
+void normalize_token(cstring_array *array, char *str, token_t token, uint64_t options) {
     cstring_array_start_token(array);
     add_normalized_token(array->str, str, token, options);
 }

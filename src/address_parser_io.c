@@ -1,4 +1,5 @@
 #include "address_parser_io.h"
+#include "token_types.h"
 
 address_parser_data_set_t *address_parser_data_set_init(char *filename) {
     address_parser_data_set_t *data_set = malloc(sizeof(address_parser_data_set_t));

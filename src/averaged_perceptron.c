@@ -6,7 +6,7 @@ static inline bool averaged_perceptron_get_feature_id(averaged_perceptron_t *sel
     return trie_get_data(self->features, feature, feature_id);
 }
 
-inline double_array *averaged_perceptron_predict_scores(averaged_perceptron_t *self, cstring_array *features) {
+double_array *averaged_perceptron_predict_scores(averaged_perceptron_t *self, cstring_array *features) {
     if (self->scores == NULL || self->scores->n == 0) self->scores = double_array_new_zeros((size_t)self->num_classes);
 
     double_array_zero(self->scores->a, self->scores->n);
@@ -35,7 +35,7 @@ inline double_array *averaged_perceptron_predict_scores(averaged_perceptron_t *s
     return self->scores;   
 }
 
-inline double_array *averaged_perceptron_predict_scores_counts(averaged_perceptron_t *self, khash_t(str_uint32) *feature_counts) {
+double_array *averaged_perceptron_predict_scores_counts(averaged_perceptron_t *self, khash_t(str_uint32) *feature_counts) {
     if (self->scores == NULL || self->scores->n == 0) self->scores = double_array_new_zeros((size_t)self->num_classes);
 
     double_array_zero(self->scores->a, self->scores->n);
@@ -66,7 +66,7 @@ inline double_array *averaged_perceptron_predict_scores_counts(averaged_perceptr
 }
 
 
-inline uint32_t averaged_perceptron_predict(averaged_perceptron_t *self, cstring_array *features) {
+uint32_t averaged_perceptron_predict(averaged_perceptron_t *self, cstring_array *features) {
     double_array *scores = averaged_perceptron_predict_scores(self, features);
 
     int64_t max_score = double_array_argmax(scores->a, scores->n);
@@ -75,7 +75,7 @@ inline uint32_t averaged_perceptron_predict(averaged_perceptron_t *self, cstring
 
 }
 
-inline uint32_t averaged_perceptron_predict_counts(averaged_perceptron_t *self, khash_t(str_uint32) *feature_counts) {
+uint32_t averaged_perceptron_predict_counts(averaged_perceptron_t *self, khash_t(str_uint32) *feature_counts) {
     double_array *scores = averaged_perceptron_predict_scores_counts(self, feature_counts);
 
     int64_t max_score = double_array_argmax(scores->a, scores->n);

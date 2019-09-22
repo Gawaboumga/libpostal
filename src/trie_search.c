@@ -1,4 +1,5 @@
 #include "trie_search.h"
+#include "token_types.h"
 
 typedef enum {
     SEARCH_STATE_BEGIN,
@@ -174,11 +175,11 @@ bool trie_search_from_index(trie_t *self, char *text, uint32_t start_node_id, ph
     return true;
 }
 
-inline bool trie_search_with_phrases(trie_t *self, char *str, phrase_array **phrases) {
+bool trie_search_with_phrases(trie_t *self, char *str, phrase_array **phrases) {
     return trie_search_from_index(self, str, ROOT_NODE_ID, phrases);
 }
 
-inline phrase_array *trie_search(trie_t *self, char *text) {
+phrase_array *trie_search(trie_t *self, char *text) {
     phrase_array *phrases = NULL;
     if (!trie_search_with_phrases(self, text, &phrases)) {
         return false;
@@ -461,11 +462,11 @@ bool trie_search_tokens_from_index(trie_t *self, char *str, token_array *tokens,
     return true;
 }
 
-inline bool trie_search_tokens_with_phrases(trie_t *self, char *str, token_array *tokens, phrase_array **phrases) {
+bool trie_search_tokens_with_phrases(trie_t *self, char *str, token_array *tokens, phrase_array **phrases) {
     return trie_search_tokens_from_index(self, str, tokens, ROOT_NODE_ID, phrases);
 }
 
-inline phrase_array *trie_search_tokens(trie_t *self, char *str, token_array *tokens) {
+phrase_array *trie_search_tokens(trie_t *self, char *str, token_array *tokens) {
     phrase_array *phrases = NULL;
     if (!trie_search_tokens_with_phrases(self, str, tokens, &phrases)) {
         return NULL;
@@ -588,7 +589,7 @@ phrase_t trie_search_suffixes_from_index(trie_t *self, char *word, size_t len, u
     return (phrase_t) {phrase_start, phrase_len, value};
 }
 
-inline phrase_t trie_search_suffixes_from_index_get_suffix_char(trie_t *self, char *word, size_t len, uint32_t start_node_id) {
+phrase_t trie_search_suffixes_from_index_get_suffix_char(trie_t *self, char *word, size_t len, uint32_t start_node_id) {
     if (word == NULL || len == 0) return NULL_PHRASE;
     trie_node_t node = trie_get_node(self, start_node_id);
     unsigned char suffix_char = TRIE_SUFFIX_CHAR[0];
@@ -603,7 +604,7 @@ inline phrase_t trie_search_suffixes_from_index_get_suffix_char(trie_t *self, ch
     return trie_search_suffixes_from_index(self, word, len, node_id);
 }
 
-inline phrase_t trie_search_suffixes(trie_t *self, char *word, size_t len) {
+phrase_t trie_search_suffixes(trie_t *self, char *word, size_t len) {
     if (word == NULL || len == 0) return NULL_PHRASE;
     return trie_search_suffixes_from_index_get_suffix_char(self, word, len, ROOT_NODE_ID);
 }
@@ -788,7 +789,7 @@ phrase_t trie_search_prefixes_from_index(trie_t *self, char *word, size_t len, u
     return (phrase_t) {phrase_start, phrase_len, value};
 }
 
-inline phrase_t trie_search_prefixes_from_index_get_prefix_char(trie_t *self, char *word, size_t len, uint32_t start_node_id) {
+phrase_t trie_search_prefixes_from_index_get_prefix_char(trie_t *self, char *word, size_t len, uint32_t start_node_id) {
     trie_node_t node = trie_get_node(self, start_node_id);
     unsigned char prefix_char = TRIE_PREFIX_CHAR[0];
     uint32_t node_id = trie_get_transition_index(self, node, prefix_char);
@@ -801,7 +802,7 @@ inline phrase_t trie_search_prefixes_from_index_get_prefix_char(trie_t *self, ch
     return trie_search_prefixes_from_index(self, word, len, node_id);
 }
 
-inline phrase_t trie_search_prefixes(trie_t *self, char *word, size_t len) {
+phrase_t trie_search_prefixes(trie_t *self, char *word, size_t len) {
     if (word == NULL || len == 0) return NULL_PHRASE;
     return trie_search_prefixes_from_index_get_prefix_char(self, word, len, ROOT_NODE_ID);
 }
@@ -834,7 +835,7 @@ bool token_phrase_memberships(phrase_array *phrases, int64_array *phrase_members
     return true;
 }
 
-inline char *cstring_array_get_phrase(cstring_array *str, char_array *phrase_tokens, phrase_t phrase) {
+char *cstring_array_get_phrase(cstring_array *str, char_array *phrase_tokens, phrase_t phrase) {
     char_array_clear(phrase_tokens);
 
     size_t phrase_end = phrase.start + phrase.len;

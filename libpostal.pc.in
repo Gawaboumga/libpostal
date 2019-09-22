@@ -1,11 +1,10 @@
-prefix=@prefix@
-exec_prefix=@exec_prefix@
-libdir=@libdir@
-includedir=@includedir@
+#cmakedefine prefix @prefix@
+#cmakedefine exec_prefix @exec_prefix@
+#cmakedefine libdir @libdir@
+#cmakedefine includedir @includedir@
 
-Name: libpostal
-Description: Fast international street address parsing and normalization using statistical NLP.
-Version: @PACKAGE_VERSION@
-Libs: -L${libdir} -lpostal
-Libs.private: @LIBS@
-Cflags: -I${includedir}
+#define LIBRARY_Name "libpostal"
+#define LIBRARY_Description "Fast international street address parsing and normalization using statistical NLP."
+#cmakedefine Version @PACKAGE_VERSION@
+
+#define HAVE_DIRENT_H 1
