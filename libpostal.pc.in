@@ -6,5 +6,3 @@
 #define LIBRARY_Name "libpostal"
 #define LIBRARY_Description "Fast international street address parsing and normalization using statistical NLP."
 #cmakedefine Version @PACKAGE_VERSION@
-
-#define HAVE_DIRENT_H 1

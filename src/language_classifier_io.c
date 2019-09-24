@@ -116,7 +116,7 @@ language_classifier_minibatch_t *language_classifier_minibatch_new(void) {
     return minibatch;
 }
 
-inline bool language_classifier_language_is_valid(char *language) {
+bool language_classifier_language_is_valid(char *language) {
     return !string_equals(language, AMBIGUOUS_LANGUAGE) && !string_equals(language, UNKNOWN_LANGUAGE);
 }
 
@@ -168,7 +168,7 @@ language_classifier_minibatch_t *language_classifier_data_set_get_minibatch_with
     return minibatch;
 }
 
-inline language_classifier_minibatch_t *language_classifier_data_set_get_minibatch(language_classifier_data_set_t *self, khash_t(str_uint32) *labels) {
+language_classifier_minibatch_t *language_classifier_data_set_get_minibatch(language_classifier_data_set_t *self, khash_t(str_uint32) *labels) {
     return language_classifier_data_set_get_minibatch_with_size(self, labels, LANGUAGE_CLASSIFIER_DEFAULT_BATCH_SIZE);
 }
 

@@ -88,7 +88,7 @@ bool sparse_matrix_alias_columns(sparse_matrix_t *matrix, khash_t(int_uint32) *u
     return true;
 }
 
-inline bool sparse_matrix_add_unique_columns_alias(sparse_matrix_t *matrix, khash_t(int_uint32) *unique_columns, uint32_array *array) {
+bool sparse_matrix_add_unique_columns_alias(sparse_matrix_t *matrix, khash_t(int_uint32) *unique_columns, uint32_array *array) {
     return sparse_matrix_add_unique_columns(matrix, unique_columns, array) &&
            sparse_matrix_alias_columns(matrix, unique_columns);
 }

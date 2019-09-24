@@ -2,7 +2,7 @@
 #include "float_utils.h"
 #include "log/log.h"
 
-inline void regularize_l2(double *theta, size_t n, double reg_update) {
+void regularize_l2(double *theta, size_t n, double reg_update) {
     for (size_t i = 0; i < n; i++) {
         double current_value = theta[i];
         double updated_value = current_value - current_value * reg_update;
@@ -16,7 +16,7 @@ inline void regularize_l2(double *theta, size_t n, double reg_update) {
     }
 }
 
-inline void regularize_l1(double *theta, size_t n, double reg_update) {
+void regularize_l1(double *theta, size_t n, double reg_update) {
     for (size_t i = 0; i < n; i++) {
         double current_value = theta[i];
         double updated_value = current_value - sign(current_value) * reg_update;

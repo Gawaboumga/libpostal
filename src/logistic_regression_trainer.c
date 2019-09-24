@@ -160,11 +160,11 @@ exit_cost_matrices_created:
     return cost;
 }
 
-inline double logistic_regression_trainer_minibatch_cost(logistic_regression_trainer_t *self, feature_count_array *features, cstring_array *labels) {
+double logistic_regression_trainer_minibatch_cost(logistic_regression_trainer_t *self, feature_count_array *features, cstring_array *labels) {
     return logistic_regression_trainer_minibatch_cost_params(self, features, labels, false);
 }
 
-inline double logistic_regression_trainer_minibatch_cost_regularized(logistic_regression_trainer_t *self, feature_count_array *features, cstring_array *labels) {
+double logistic_regression_trainer_minibatch_cost_regularized(logistic_regression_trainer_t *self, feature_count_array *features, cstring_array *labels) {
     return logistic_regression_trainer_minibatch_cost_params(self, features, labels, true);
 }
 

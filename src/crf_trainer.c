@@ -112,7 +112,7 @@ bool crf_trainer_get_class_id_exists(crf_trainer_t *self, char *class_name, uint
     return false;
 }
 
-inline bool crf_trainer_get_class_id(crf_trainer_t *self, char *class_name, uint32_t *class_id, bool add_if_missing) {
+bool crf_trainer_get_class_id(crf_trainer_t *self, char *class_name, uint32_t *class_id, bool add_if_missing) {
     bool exists;
     return crf_trainer_get_class_id_exists(self, class_name, class_id, add_if_missing, &exists);
 }
@@ -163,29 +163,29 @@ bool crf_trainer_hash_to_id(khash_t(str_uint32) *features, char *feature, uint32
 }
 
 
-inline bool crf_trainer_hash_feature_to_id_exists(crf_trainer_t *self, char *feature, uint32_t *feature_id, bool *exists) {
+bool crf_trainer_hash_feature_to_id_exists(crf_trainer_t *self, char *feature, uint32_t *feature_id, bool *exists) {
     return crf_trainer_hash_to_id(self->features, feature, feature_id, exists);
 }
 
-inline bool crf_trainer_hash_feature_to_id(crf_trainer_t *self, char *feature, uint32_t *feature_id) {
+bool crf_trainer_hash_feature_to_id(crf_trainer_t *self, char *feature, uint32_t *feature_id) {
     bool exists;
     return crf_trainer_hash_feature_to_id_exists(self, feature, feature_id, &exists);
 }
 
 
-inline bool crf_trainer_hash_prev_tag_feature_to_id_exists(crf_trainer_t *self, char *feature, uint32_t *feature_id, bool *exists) {
+bool crf_trainer_hash_prev_tag_feature_to_id_exists(crf_trainer_t *self, char *feature, uint32_t *feature_id, bool *exists) {
     return crf_trainer_hash_to_id(self->prev_tag_features, feature, feature_id, exists);
 }
 
-inline bool crf_trainer_hash_prev_tag_feature_to_id(crf_trainer_t *self, char *feature, uint32_t *feature_id) {
+bool crf_trainer_hash_prev_tag_feature_to_id(crf_trainer_t *self, char *feature, uint32_t *feature_id) {
     bool exists;
     return crf_trainer_hash_feature_to_id_exists(self, feature, feature_id, &exists);
 }
 
-inline bool crf_trainer_get_feature_id(crf_trainer_t *self, char *feature, uint32_t *feature_id) {
+bool crf_trainer_get_feature_id(crf_trainer_t *self, char *feature, uint32_t *feature_id) {
     return str_uint32_hash_get(self->features, feature, feature_id);
 }
 
-inline bool crf_trainer_get_prev_tag_feature_id(crf_trainer_t *self, char *feature, uint32_t *feature_id) {
+bool crf_trainer_get_prev_tag_feature_id(crf_trainer_t *self, char *feature, uint32_t *feature_id) {
     return str_uint32_hash_get(self->prev_tag_features, feature, feature_id);
 }
